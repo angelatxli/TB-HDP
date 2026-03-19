@@ -368,8 +368,7 @@ ui <- dashboardPage(
                      
                      ### Inputs ------
                      box(title = "Compound", width = 12, collapsible = TRUE, collapsed = FALSE,
-                         fluidRow(column(12,textInput("drugname_pc", "Name", "Demo Compound"))),
-                         fluidRow(column(12,selectInput("drugbackbone_pc", "Backbone regimen", list(" ", "BPa", "PaL"))))
+                         fluidRow(column(12,textInput("drugname_pc", "Name", "Demo Compound")))
                      ),
                      
                      box(title = "Simulation parameters", width = 12, collapsible = TRUE, collapsed = TRUE,
@@ -528,10 +527,7 @@ ui <- dashboardPage(
       
       tabItem(tabName = "Ack",
               box(width = 12, title = "Acknowledgements", collapsible = FALSE, solidHeader = TRUE,
-                  "[To be completed]",
-                  br(),
-                  br(),
-                  "This work was supported by the Gates Foundation.",
+                  "This work was supported by the Gates Foundation Investment “Multi-model landscape to integrate machine learning, site of action, and mechanistic PKPD translational tools for improved selection of TB drug combination regimens and inform dose selection” (INV-025785).",
                   br(),
                   div(style = "text-align: center;", tags$img(src = "logo.png", height = "150px"))
               )
@@ -541,14 +537,8 @@ ui <- dashboardPage(
       ## Citation Section------
       
       tabItem(tabName = "Cite",
-              box( width = 12, collapsible = FALSE, solidHeader = TRUE, title = "Citation",  
-                   "[To be completed]",
-                   br(),
-                   br(),
-                   "Full methodology and results of this project was published in ...",
-                   br(),
-                   br(),
-                   "Github code..."
+              box(width = 12, collapsible = FALSE, solidHeader = TRUE, title = "Citation",  
+                  includeMarkdown("www/citation.md")
               )
       )
     )
