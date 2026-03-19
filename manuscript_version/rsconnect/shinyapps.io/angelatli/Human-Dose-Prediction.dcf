@@ -1,0 +1,12 @@
+name: Human-Dose-Prediction
+title: Human-Dose-Prediction
+username: angelatli
+account: angelatli
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16776324
+bundleId: 11716849
+url: https://angelatli.shinyapps.io/Human-Dose-Prediction/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

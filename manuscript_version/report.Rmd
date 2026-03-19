@@ -1,0 +1,76 @@
+---
+title: "TB Human Dose Prediction Report"
+output: pdf_document
+geometry: top=1in, bottom=1in, left=1in, right=1in
+header-includes:
+  - \usepackage{titling}
+  - \setlength{\droptitle}{-3cm}  # move title up
+  - \preauthor{}
+  - \postauthor{}
+  - \predate{}   # Remove date space
+  - \postdate{}
+params:
+  exposure_plot: NULL
+  coverage_plot: NULL
+  exposure_caseum: NULL
+  exposure_cellular: NULL
+  coverage_caseum: NULL
+  coverage_cellular: NULL
+  input_table: NULL
+  param_table: NULL
+  result_table: NULL
+---
+
+```{r echo=FALSE, fig.width=6, fig.height=4, results='asis', warning=FALSE}
+if(!is.null(params$input_table)) {
+  #cat("\n\\newpage\n")
+  knitr::kable(params$input_table, booktabs = TRUE, caption = "Input Parameters") 
+  #%>%
+    #kableExtra::collapse_rows(columns = 1, valign = "middle", latex_hline = "major")
+}
+
+if(!is.null(params$param_table)) {
+  knitr::kable(params$param_table, booktabs = TRUE, caption = "Calculated Parameters")
+}
+
+if(!is.null(params$result_table)) {
+  knitr::kable(params$result_table, booktabs = TRUE, caption = "Dose Projections")
+}
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Plasma Exposure", warning=FALSE}
+if (!is.null(params$exposure_plot)) {
+  print(params$exposure_plot)
+}
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Plasma Coverage", warning=FALSE}
+if (!is.null(params$coverage_plot)) {
+  print(params$coverage_plot)
+}
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Caseum Exposure", warning=FALSE}
+if (!is.null(params$exposure_caseum)) {
+  print(params$exposure_caseum)
+  }
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Caseum Coverage", warning=FALSE}
+if (!is.null(params$coverage_caseum)) {
+  print(params$coverage_caseum)
+}
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Cellular Lesion Exposure", warning=FALSE}
+if (!is.null(params$exposure_cellular)) {
+  print(params$exposure_cellular)
+}
+```
+
+```{r echo=FALSE, fig.width=6, fig.height=3.1, results='asis', fig.cap= "Cellular Lesion Coverage", warning=FALSE}
+if (!is.null(params$coverage_caseum)) {
+  print(params$coverage_cellular)
+}
+```
+
