@@ -4,9 +4,9 @@ library(shinyjs)
 library(bslib)
 library(shinydashboard)
 library(shinyWidgets)
-
+    
 animals <- c("BALB/c Mouse", "Rat", "Dog")
-
+ 
 ui <- dashboardPage(
   skin = "blue", 
   dashboardHeader(title = "TB HDP"),
