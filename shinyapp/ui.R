@@ -2,6 +2,7 @@
 library(shiny)
 library(shinyjs)
 library(bslib)
+library(shinyBS)
 library(shinydashboard)
 library(shinyWidgets)
     
@@ -249,7 +250,6 @@ ui <- dashboardPage(
                            )
                          ),
                          
-                         
                          fluidRow(column(12, numericInput("dose_sp", "Dose (mg)", value = 200, min = 0))),
                          fluidRow(column(12, numericInput("ndoses_sp", "Number of doses", value = 14, min = 1, max = 20))),
                          fluidRow(column(12, div(style = "white-space: nowrap;", numericInput("inter_sp", "Dosing interval (h)", value = 24, min = 1))))
@@ -281,12 +281,74 @@ ui <- dashboardPage(
                          )
                      ),
                      
-                     box(title = HTML("<i>In vivo </i> site-of-action PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
-                         fluidRow(column(12, numericInput("PC_caseum", "Plasma-to-caseum partition coefficient", value = 0.5, min = 0, step = 0.01)))
+                     box(
+                       title = tagList(
+                         HTML("<i>In vivo</i> site-of-action PK "),
+                         tags$div(
+                           class = "info-wrap",
+                           tags$span(
+                             class = "info-icon",
+                             icon("info-circle")
+                           ),
+                           tags$div(
+                             class = "info-popup",
+                             tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
+                                    translational modeling platform. For further details, please refer to this",
+                             tags$a(
+                               href = "https://assets-eu.researchsquare.com/files/rs-6890010/v1/700ea291-54cc-42a7-924e-bcdd92cdcea0.pdf",
+                               target = "_blank",
+                               "link"
+                             ),
+                             "."
+                           )
+                         )
+                         )
+                       ),
+                       width = 12, 
+                       collapsible = TRUE, 
+                       collapsed = TRUE,
+                       fluidRow(
+                           column(
+                             12, 
+                             numericInput(
+                               "PC_caseum",
+                               label = tagList(
+                                 "Plasma-to-caseum partition coefficient"
+                                 ),
+                           value = 0.5,
+                           min = 0,
+                           step = 0.01
+                           )
+                           )
+                         )
                      ),
                      
-                     box(title = HTML("<i>Ex vivo</i> PD"), width = 12, collapsible = TRUE, collapsed = FALSE,
-                         fluidRow(column(12, numericInput("casMBC90_sp", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.005, min = 0)))
+                     box(
+                       title = tagList(
+                         HTML("<i>Ex vivo</i> PD"),
+                         tags$div(
+                           class = "info-wrap",
+                           tags$span(
+                             class = "info-icon",
+                             icon("info-circle")
+                           ),
+                           tags$div(
+                             class = "info-popup",
+                             tags$p("This parameter describes drug activity at the site of disease. For further details, please refer to this",
+                                    tags$a(
+                                      href = "https://journals.asm.org/doi/10.1128/aac.02266-17",
+                                      target = "_blank",
+                                      "link"
+                                      ),
+                                    "."
+                             )
+                           )
+                         )
+                       ),
+                       width = 12, 
+                       collapsible = TRUE, 
+                       collapsed = FALSE,
+                       fluidRow(column(12, numericInput("casMBC90_sp", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.005, min = 0)))
                      ),
                      
                      column(12, radioButtons("pkmethod_sp", "Clearance Prediction Method",
@@ -431,17 +493,90 @@ ui <- dashboardPage(
                          )
                      ),
                      
-                     box(title = HTML("<i>In vivo</i> site-of-action PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
+                     box(
+                       title = tagList(
+                         HTML("<i>In vivo</i> site-of-action PK "),
+                         tags$div(
+                           class = "info-wrap",
+                           tags$span(
+                             class = "info-icon",
+                             icon("info-circle")
+                             ),
+                           tags$div(
+                             class = "info-popup",
+                             tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
+                                    translational modeling platform. For further details, please refer to this",
+                                    tags$a(
+                                      href = "https://assets-eu.researchsquare.com/files/rs-6890010/v1/700ea291-54cc-42a7-924e-bcdd92cdcea0.pdf",
+                                      target = "_blank",
+                                      "link"
+                                      ),
+                                    "."
+                                    )
+                             )
+                           )
+                         ),
+                         width = 12, 
+                         collapsible = TRUE, 
+                         collapsed = TRUE,
                          fluidRow(column(12, numericInput("PC_caseum_pc", "Plasma-to-caseum partition coefficient", value = 0.5, min = 0, step = 0.01))),
                          fluidRow(column(12, numericInput("PC_cell", "Plasma-to-cellular partition coefficient", value = 0.8, min = 0, step = 0.01)))
                      ),
                      
                      
-                     box(title = HTML("<i>Ex vivo</i> PD"), width = 12, collapsible = TRUE, collapsed = FALSE,
-                         fluidRow(column(12, numericInput("casMBC90_pc", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.005, min = 0)))
+                     box(
+                       title = tagList(
+                         HTML("<i>Ex vivo</i> PD"),
+                         tags$div(
+                           class = "info-wrap",
+                           tags$span(
+                             class = "info-icon",
+                             icon("info-circle")
+                             ),
+                           tags$div(
+                             class = "info-popup",
+                             tags$p("This parameter describes drug activity at the site of disease. For further details, please refer to this",
+                                    tags$a(
+                                      href = "https://journals.asm.org/doi/10.1128/aac.02266-17",
+                                      target = "_blank",
+                                      "link"
+                                      ),
+                                    "."
+                             )
+                           )
+                         )
+                       ),
+                       width = 12, 
+                       collapsible = TRUE, 
+                       collapsed = FALSE,
+                       fluidRow(column(12, numericInput("casMBC90_pc", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.005, min = 0)))
                      ),
                      
-                     box(title = HTML("<i>In vivo</i> PD"), width = 12, collapsible = TRUE, collapsed = FALSE,
+                     box(
+                       title = tagList(
+                       HTML("<i>In vivo</i> PD"),
+                         tags$div(
+                           class = "info-wrap",
+                           tags$span(
+                             class = "info-icon",
+                             icon("info-circle")
+                           ),
+                           tags$div(
+                             class = "info-popup",
+                             tags$p("These parameters describe drug activity quantified from a BALB/c mouse PK-PD model. For further details, please refer to this",
+                             tags$a(
+                               href = "https://pubmed.ncbi.nlm.nih.gov/37321622/",
+                               target = "_blank",
+                               "link"
+                               ),
+                             "."
+                             )
+                             )
+                           )
+                         ),
+                         width = 12, 
+                         collapsible = TRUE, 
+                         collapsed = FALSE,
                          fluidRow(
                            column(6, selectInput("infmod", "Infection Model", list("Acute", "Subacute", "Chronic"))),
                            column(6, numericInput("ec50", HTML("EC<sub>50</sub> (mg/L)"), value = 4, min = 0))),
@@ -530,18 +665,17 @@ ui <- dashboardPage(
                   "This work was supported by the Gates Foundation Investment “Multi-model landscape to integrate machine learning, site of action, and mechanistic PKPD translational tools for improved selection of TB drug combination regimens and inform dose selection” (INV-025785).",
                   br(),
                   div(style = "text-align: center;", tags$img(src = "logo.png", height = "150px"))
-              )
-      ),
-      
+                  )
+              ),
       
       ## Citation Section------
       
       tabItem(tabName = "Cite",
               box(width = 12, collapsible = FALSE, solidHeader = TRUE, title = "Citation",  
                   includeMarkdown("www/citation.md")
+                  )
               )
-      )
-    )
+      ),
   ),
 
   
@@ -611,6 +745,39 @@ ui <- dashboardPage(
      font-weight: bold;
      border-color: #408A0B;
      }
+    
+    
+    .info-wrap {
+    position: relative;
+    display: inline-block;
+    margin-left: 6px;
+  }
+
+  .info-icon {
+    cursor: help;
+    color: #3c8dbc;
+    font-size: 14px;
+  }
+
+  .info-popup {
+    display: none;
+    position: absolute;
+    left: 20px;
+    top: -5px;
+    width: 280px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 9999;
+  }
+
+  .info-wrap:hover .info-popup {
+    display: block;
+  }
+    
+    
     
     /* Force 'message' type notifications to be green */
       .shiny-notification-message {

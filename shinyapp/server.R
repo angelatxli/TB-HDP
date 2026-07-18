@@ -2,6 +2,7 @@
 library(shiny)
 library(bslib)
 library(shinyjs)
+library(shinyBS)
 library(shinydashboard)
 library(purrr)
 library(markdown)
