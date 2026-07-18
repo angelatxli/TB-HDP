@@ -16,6 +16,3 @@ Drug time-concentration profiles are outputted in plasma, cellular lesions, and 
 
 3. **Target-based coverage assessment:**
 PK-PD target attainment is assessed using biologically-relevant PD metrics against PK matrices.
-
-Additional information on the modeling framework can be found
-[here](https://pubmed.ncbi.nlm.nih.gov/37321622/).
