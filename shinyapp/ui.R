@@ -112,27 +112,27 @@ ui <- dashboardPage(
                 
                 box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                     fluidRow(column(6, numericInput("fu_lo", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                    fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 12, min = 0)))),
+                    fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
                     fluidRow(column(12, numericInput("micpk_lo", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
                 ),
                 
                 box(title = HTML("<i>In vivo</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                     fluidRow(
                       column(4, selectInput("species1_lo", "Preclinical species", choices = animals,selected = "Mouse")),
-                      column(4, numericInput("preclin_cl1_lo", "Plasma CL (L/hr/kg)", value = 20, min = 0)),
-                      column(4, numericInput("preclin_vss1_lo", "Plasma Vss (L)", value = 45, min = 0))
+                      column(4, numericInput("preclin_cl1_lo", "Plasma CL (L/hr/kg)", value = 2.5, min = 0)),
+                      column(4, numericInput("preclin_vss1_lo", "Plasma Vss (L/kg)", value = 0.07, min = 0, step = 0.01))
                       ),
                     
                     fluidRow(
                       column(4, selectInput("species2_lo", "Preclinical species", choices = animals,selected = "Rat")),
-                      column(4, numericInput("preclin_cl2_lo", "Plasma CL (L/hr/kg)", value = 40, min = 0)),
-                      column(4, numericInput("preclin_vss2_lo", "Plasma Vss (L)", value = 30, min = 0))           
+                      column(4, numericInput("preclin_cl2_lo", "Plasma CL (L/hr/kg)", value = 4, min = 0)),
+                      column(4, numericInput("preclin_vss2_lo", "Plasma Vss (L/kg)", value = 1, min = 0))           
                       ),
                     
                     fluidRow(
                       column(4, selectInput("species3_lo", "Preclinical species", choices = animals,selected = "Dog")),
-                      column(4, numericInput("preclin_cl3_lo", "Plasma CL (L/hr/kg)", value = 50, min = 0)),
-                      column(4, numericInput("preclin_vss3_lo", "Plasma Vss (L)", value = 56, min = 0))            
+                      column(4, numericInput("preclin_cl3_lo", "Plasma CL (L/hr/kg)", value = 10, min = 0)),
+                      column(4, numericInput("preclin_vss3_lo", "Plasma Vss (L/kg)", value = 4, min = 0))            
                       )
                   ),
                 
@@ -257,27 +257,27 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(column(6, numericInput("fu_sp", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_sp", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 12, min = 0)))),
+                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_sp", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
                          fluidRow(column(12, numericInput("micpk_sp", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
                      ),
                      
                      box(title = HTML("<i>In vivo</i> plasma PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
                            column(4, selectInput("species1_sp", "Preclinical species", choices = animals,selected = "Mouse")),
-                           column(4, numericInput("preclin_cl1_sp", "Plasma CL (L/hr/kg)", value = 20, min = 0)),
-                           column(4, numericInput("preclin_vss1_sp", "Plasma Vss (L)", value = 45, min = 0))
+                           column(4, numericInput("preclin_cl1_sp", "Plasma CL (L/hr/kg)", value = 2.5, min = 0)),
+                           column(4, numericInput("preclin_vss1_sp", "Plasma Vss (L/kg)", value = 0.07, min = 0))
                          ),
                          
                          fluidRow(
                            column(4, selectInput("species2_sp", "Preclinical species", choices = animals,selected = "Rat")),
-                           column(4, numericInput("preclin_cl2_sp", "Plasma CL (L/hr/kg)", value = 40, min = 0)),
-                           column(4, numericInput("preclin_vss2_sp", "Plasma Vss (L)", value = 30, min = 0))           
+                           column(4, numericInput("preclin_cl2_sp", "Plasma CL (L/hr/kg)", value = 4, min = 0)),
+                           column(4, numericInput("preclin_vss2_sp", "Plasma Vss (L/kg)", value = 1, min = 0))           
                          ),
                          
                          fluidRow(
                            column(4, selectInput("species3_sp", "Preclinical species", choices = animals,selected = "Dog")),
-                           column(4, numericInput("preclin_cl3_sp", "Plasma CL (L/hr/kg)", value = 50, min = 0)),
-                           column(4, numericInput("preclin_vss3_sp", "Plasma Vss (L)", value = 56, min = 0))            
+                           column(4, numericInput("preclin_cl3_sp", "Plasma CL (L/hr/kg)", value = 10, min = 0)),
+                           column(4, numericInput("preclin_vss3_sp", "Plasma Vss (L/kg)", value = 4, min = 0))            
                          )
                      ),
                      
@@ -315,10 +315,10 @@ ui <- dashboardPage(
                                label = tagList(
                                  "Plasma-to-caseum partition coefficient"
                                  ),
-                           value = 0.5,
-                           min = 0,
-                           step = 0.01
-                           )
+                               value = 0.6,
+                               min = 0,
+                               step = 0.01
+                               )
                            )
                          )
                      ),
@@ -348,7 +348,7 @@ ui <- dashboardPage(
                        width = 12, 
                        collapsible = TRUE, 
                        collapsed = FALSE,
-                       fluidRow(column(12, numericInput("casMBC90_sp", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.005, min = 0)))
+                       fluidRow(column(12, numericInput("casMBC90_sp", HTML("casMBC<sub>90</sub> (mg/L)"), value = 0.5, min = 0)))
                      ),
                      
                      column(12, radioButtons("pkmethod_sp", "Clearance Prediction Method",
@@ -469,27 +469,27 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(column(6, numericInput("fu_pc", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_pc", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 12, min = 0)))),
+                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_pc", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
                          fluidRow(column(12, numericInput("micpk_pc", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
                      ),
                      
                      box(title = HTML("<i>In vivo</i> plasma PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
                            column(4, selectInput("species1_pc", "Preclinical species", choices = animals,selected = "Mouse")),
-                           column(4, numericInput("preclin_cl1_pc", "Plasma CL (L/hr/kg)", value = 20, min = 0)),
-                           column(4, numericInput("preclin_vss1_pc", "Plasma Vss (L)", value = 45, min = 0))
+                           column(4, numericInput("preclin_cl1_pc", "Plasma CL (L/hr/kg)", value = 2.5, min = 0)),
+                           column(4, numericInput("preclin_vss1_pc", "Plasma Vss (L/kg)", value = 45, min = 0))
                          ),
                          
                          fluidRow(
                            column(4, selectInput("species2_pc", "Preclinical species", choices = animals,selected = "Rat")),
-                           column(4, numericInput("preclin_cl2_pc", "Plasma CL (L/hr/kg)", value = 40, min = 0)),
-                           column(4, numericInput("preclin_vss2_pc", "Plasma Vss (L)", value = 30, min = 0))           
+                           column(4, numericInput("preclin_cl2_pc", "Plasma CL (L/hr/kg)", value = 4, min = 0)),
+                           column(4, numericInput("preclin_vss2_pc", "Plasma Vss (L/kg)", value = 1, min = 0))           
                          ),
                          
                          fluidRow(
                            column(4, selectInput("species3_pc", "Preclinical species", choices = animals,selected = "Dog")),
-                           column(4, numericInput("preclin_cl3_pc", "Plasma CL (L/hr)", value = 50, min = 0)),
-                           column(4, numericInput("preclin_vss3_pc", "Plasma Vss (L)", value = 56, min = 0))            
+                           column(4, numericInput("preclin_cl3_pc", "Plasma CL (L/hr)", value = 10, min = 0)),
+                           column(4, numericInput("preclin_vss3_pc", "Plasma Vss (L/kg)", value = 4, min = 0))            
                          )
                      ),
                      
@@ -519,8 +519,8 @@ ui <- dashboardPage(
                          width = 12, 
                          collapsible = TRUE, 
                          collapsed = TRUE,
-                         fluidRow(column(12, numericInput("PC_caseum_pc", "Plasma-to-caseum partition coefficient", value = 0.5, min = 0, step = 0.01))),
-                         fluidRow(column(12, numericInput("PC_cell", "Plasma-to-cellular partition coefficient", value = 0.8, min = 0, step = 0.01)))
+                         fluidRow(column(12, numericInput("PC_caseum_pc", "Plasma-to-caseum partition coefficient", value = 0.6, min = 0, step = 0.01))),
+                         fluidRow(column(12, numericInput("PC_cell", "Plasma-to-cellular partition coefficient", value = 2.8, min = 0, step = 0.01)))
                      ),
                      
                      
@@ -563,7 +563,7 @@ ui <- dashboardPage(
                            ),
                            tags$div(
                              class = "info-popup",
-                             tags$p("These parameters describe drug activity quantified from a BALB/c mouse PK-PD model. For further details, please refer to this",
+                             tags$p("This parameter describes drug activity quantified from a BALB/c mouse PK-PD model. For further details, please refer to this",
                              tags$a(
                                href = "https://publications.ersnet.org/content/erj/62/2/2300165",
                                target = "_blank",
@@ -578,10 +578,10 @@ ui <- dashboardPage(
                          collapsible = TRUE, 
                          collapsed = FALSE,
                          fluidRow(
-                           column(6, selectInput("infmod", "Infection Model", list("Acute", "Subacute", "Chronic"))),
-                           column(6, numericInput("ec50", HTML("EC<sub>50</sub> (mg/L)"), value = 4, min = 0))),
-                         fluidRow(column(12,numericInput("Emax", HTML("E<sub>max</sub>"), value = 0.2, min = 0, max = 5))),
-                         fluidRow(column(12,numericInput("hill_co", HTML("Hill Coefficient"), value = 1, min = 0.1, max = 5)))
+                           column(6, selectInput("infmod", "Mouse infection model", list("Acute", "Subacute", "Chronic"))),
+                           column(6, numericInput("ec50", HTML("EC<sub>50</sub> (mg/L)"), value = 0.001, min = 0))),
+                         #fluidRow(column(12,numericInput("Emax", HTML("E<sub>max</sub>"), value = 0.2, min = 0, max = 5))),
+                         #fluidRow(column(12,numericInput("hill_co", HTML("Hill Coefficient"), value = 1, min = 0.1, max = 5)))
                      ),
                      
 

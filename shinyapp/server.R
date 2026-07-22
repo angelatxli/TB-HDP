@@ -84,16 +84,16 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_lo", value = 0.8)
-    updateNumericInput(session, "heppk_lo", value = 12)
+    updateNumericInput(session, "heppk_lo", value = 10)
     updateNumericInput(session, "micpk_lo", value = 12)
     
     # --- Preclinical PK ---
-    updateNumericInput(session, "preclin_cl1_lo", value = 20)
-    updateNumericInput(session, "preclin_vss1_lo", value = 45)
-    updateNumericInput(session, "preclin_cl2_lo", value = 40)
-    updateNumericInput(session, "preclin_vss2_lo", value = 30)
-    updateNumericInput(session, "preclin_cl3_lo", value = 50)
-    updateNumericInput(session, "preclin_vss3_lo", value = 56)
+    updateNumericInput(session, "preclin_cl1_lo", value = 2.5)
+    updateNumericInput(session, "preclin_vss1_lo", value = 0.07)
+    updateNumericInput(session, "preclin_cl2_lo", value = 4)
+    updateNumericInput(session, "preclin_vss2_lo", value = 1)
+    updateNumericInput(session, "preclin_cl3_lo", value = 10)
+    updateNumericInput(session, "preclin_vss3_lo", value = 4)
     
     # --- PD Parameters ---
     updateNumericInput(session, "MIC", value = 0.001)
@@ -518,20 +518,20 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_sp", value = 0.8)
-    updateNumericInput(session, "heppk_sp", value = 15.5)
+    updateNumericInput(session, "heppk_sp", value = 10)
     updateNumericInput(session, "micpk_sp", value = 10.2)
     
     # --- Preclinical PK ---
-    updateNumericInput(session, "preclin_cl1_sp", value = 20)
-    updateNumericInput(session, "preclin_vss1_sp", value = 45)
-    updateNumericInput(session, "preclin_cl2_sp", value = 40)
-    updateNumericInput(session, "preclin_vss2_sp", value = 30)
-    updateNumericInput(session, "preclin_cl3_sp", value = 50)
-    updateNumericInput(session, "preclin_vss3_sp", value = 56)
+    updateNumericInput(session, "preclin_cl1_sp", value = 2.5)
+    updateNumericInput(session, "preclin_vss1_sp", value = 0.07)
+    updateNumericInput(session, "preclin_cl2_sp", value = 4)
+    updateNumericInput(session, "preclin_vss2_sp", value = 1)
+    updateNumericInput(session, "preclin_cl3_sp", value = 10)
+    updateNumericInput(session, "preclin_vss3_sp", value = 4)
     
     # --- PD Parameters ---
-    updateNumericInput(session, "PC_caseum", value = 0.5)
-    updateNumericInput(session, "casMBC90_sp", value = 0.005)
+    updateNumericInput(session, "PC_caseum", value = 0.6)
+    updateNumericInput(session, "casMBC90_sp", value = 0.5)
     
     # Send a little toast message to let the user know it worked
     showNotification("Sample parameters for Demo Compound loaded.", 
@@ -945,8 +945,8 @@ server <- function(input, output, session) {
     updateNumericInput(session, "MIC_pc", value = NA)
     updateNumericInput(session, "casMBC90_pc", value = NA)
     updateNumericInput(session, "ec50", value = NA)
-    updateNumericInput(session, "Emax", value = NA)
-    updateNumericInput(session, "hill_co", value = NA)
+    #updateNumericInput(session, "Emax", value = NA)
+    #updateNumericInput(session, "hill_co", value = NA)
     
     
     plot4_pc_data(NULL)
@@ -978,20 +978,20 @@ server <- function(input, output, session) {
     updateNumericInput(session, "micpk_pc", value = 10.2)
     
     # --- Preclinical PK ---
-    updateNumericInput(session, "preclin_cl1_pc", value = 20)
-    updateNumericInput(session, "preclin_vss1_pc", value = 45)
-    updateNumericInput(session, "preclin_cl2_pc", value = 40)
-    updateNumericInput(session, "preclin_vss2_pc", value = 30)
-    updateNumericInput(session, "preclin_cl3_pc", value = 50)
-    updateNumericInput(session, "preclin_vss3_pc", value = 56)
+    updateNumericInput(session, "preclin_cl1_pc", value = 2.5)
+    updateNumericInput(session, "preclin_vss1_pc", value = 0.07)
+    updateNumericInput(session, "preclin_cl2_pc", value = 4)
+    updateNumericInput(session, "preclin_vss2_pc", value = 1)
+    updateNumericInput(session, "preclin_cl3_pc", value = 10)
+    updateNumericInput(session, "preclin_vss3_pc", value = 4)
     
     # --- PD Parameters ---
-    updateNumericInput(session, "PC_caseum_pc", value = 0.5)
-    updateNumericInput(session, "PC_cell", value = 0.8)
-    updateNumericInput(session, "casMBC90_pc", value = 0.005)
-    updateNumericInput(session, "ec50", value = 4)
-    updateNumericInput(session, "Emax", value = 0.2)
-    updateNumericInput(session, "hill_co", value = 1)
+    updateNumericInput(session, "PC_caseum_pc", value = 0.6)
+    updateNumericInput(session, "PC_cell", value = 2.8)
+    updateNumericInput(session, "casMBC90_pc", value = 0.5)
+    updateNumericInput(session, "ec50", value = 0.001)
+    #updateNumericInput(session, "Emax", value = 0.2)
+    #updateNumericInput(session, "hill_co", value = 1)
     
     # Send a toast message to let the user know it worked
     showNotification("Sample parameters for Demo Compound loaded.", 
@@ -1011,7 +1011,9 @@ server <- function(input, output, session) {
          input$preclin_vss1_pc, input$preclin_vss2_pc, input$preclin_vss3_pc,
          input$PC_caseum_pc, input$PC_cell,
          input$casMBC90_pc, 
-         input$ec50, input$Emax, input$hill_co
+         input$ec50
+         #input$Emax
+         #input$hill_co
          )
     })
   
@@ -1097,9 +1099,9 @@ server <- function(input, output, session) {
       "Plasma-to-caseum PC" = input$PC_caseum_pc,
       "Plasma-to-cell PC" = input$PC_cell,
       "casMBC90" = input$casMBC90_pc,
-      "EC50" = input$ec50,
-      "Emax" = input$Emax,
-      "Hill coefficient" = input$hill_co
+      "EC50" = input$ec50
+      #"Emax" = input$Emax,
+      #"Hill coefficient" = input$hill_co
       )
     
     # 2. Check for NA or zero values
@@ -1722,12 +1724,10 @@ server <- function(input, output, session) {
             Category = "PD Targets", 
             Parameter = c("casMBC90 (mg/L)", 
                           "Infection Model", 
-                          "EC50 (mg/L)", 
-                          "Emax"),
+                          "EC50 (mg/L)"),
             Value = as.character(c(input$casMBC90_pc, 
                                    input$infmod, 
-                                   input$ec50, 
-                                   input$Emax))
+                                   input$ec50))
           ))
         }
         
