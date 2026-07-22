@@ -295,7 +295,7 @@ ui <- dashboardPage(
                              tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
                                     translational modeling platform. For further details, please refer to this",
                              tags$a(
-                               href = "https://assets-eu.researchsquare.com/files/rs-6890010/v1/700ea291-54cc-42a7-924e-bcdd92cdcea0.pdf",
+                               href = "https://www.researchsquare.com/article/rs-6890010/v1",
                                target = "_blank",
                                "link"
                              ),
@@ -507,7 +507,7 @@ ui <- dashboardPage(
                              tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
                                     translational modeling platform. For further details, please refer to this",
                                     tags$a(
-                                      href = "https://assets-eu.researchsquare.com/files/rs-6890010/v1/700ea291-54cc-42a7-924e-bcdd92cdcea0.pdf",
+                                      href = "https://www.researchsquare.com/article/rs-6890010/v1",
                                       target = "_blank",
                                       "link"
                                       ),
@@ -565,7 +565,7 @@ ui <- dashboardPage(
                              class = "info-popup",
                              tags$p("These parameters describe drug activity quantified from a BALB/c mouse PK-PD model. For further details, please refer to this",
                              tags$a(
-                               href = "https://pubmed.ncbi.nlm.nih.gov/37321622/",
+                               href = "https://publications.ersnet.org/content/erj/62/2/2300165",
                                target = "_blank",
                                "link"
                                ),
