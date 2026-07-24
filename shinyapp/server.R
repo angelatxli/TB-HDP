@@ -89,11 +89,11 @@ server <- function(input, output, session) {
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_lo", value = 2.5)
-    updateNumericInput(session, "preclin_vss1_lo", value = 0.07)
+    updateNumericInput(session, "preclin_vss1_lo", value = 3.5)
     updateNumericInput(session, "preclin_cl2_lo", value = 4)
-    updateNumericInput(session, "preclin_vss2_lo", value = 1)
+    updateNumericInput(session, "preclin_vss2_lo", value = 4)
     updateNumericInput(session, "preclin_cl3_lo", value = 10)
-    updateNumericInput(session, "preclin_vss3_lo", value = 4)
+    updateNumericInput(session, "preclin_vss3_lo", value = 0.4)
     
     # --- PD Parameters ---
     updateNumericInput(session, "MIC", value = 0.001)
@@ -160,7 +160,7 @@ server <- function(input, output, session) {
       "Number of doses" = input$ndoses_lo,
       "Dosing interval" = input$inter_lo,
       "MIC" = input$MIC
-    )
+      )
     
     # 2. Check for NA or zero values
     missing <- names(reqs)[sapply(reqs, function(x) is.null(x) || is.na(x) || x <= 0)]
@@ -221,7 +221,13 @@ server <- function(input, output, session) {
     weights_df <- species_params %>% filter(Species %in% species)
     weights <- weights_df$BW[match(species, weights_df$Species)]
     
-    df_temp <- data.frame(CL = cls, V = vs, Species = species, BodyWeight = weights)
+    df_temp <- data.frame(
+      CL = cls * weights, 
+      V = vs * weights, 
+      Species = species, 
+      BodyWeight = weights
+      )
+    
     df_temp$logBW <- log10(df_temp$BodyWeight)
     df_temp$logCL <- log10(df_temp$CL)
     df_temp$logV <- log10(df_temp$V)
@@ -523,11 +529,11 @@ server <- function(input, output, session) {
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_sp", value = 2.5)
-    updateNumericInput(session, "preclin_vss1_sp", value = 0.07)
+    updateNumericInput(session, "preclin_vss1_sp", value = 3.5)
     updateNumericInput(session, "preclin_cl2_sp", value = 4)
-    updateNumericInput(session, "preclin_vss2_sp", value = 1)
+    updateNumericInput(session, "preclin_vss2_sp", value = 4)
     updateNumericInput(session, "preclin_cl3_sp", value = 10)
-    updateNumericInput(session, "preclin_vss3_sp", value = 4)
+    updateNumericInput(session, "preclin_vss3_sp", value = 0.4)
     
     # --- PD Parameters ---
     updateNumericInput(session, "PC_caseum", value = 0.6)
@@ -979,11 +985,11 @@ server <- function(input, output, session) {
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_pc", value = 2.5)
-    updateNumericInput(session, "preclin_vss1_pc", value = 0.07)
+    updateNumericInput(session, "preclin_vss1_pc", value = 3.5)
     updateNumericInput(session, "preclin_cl2_pc", value = 4)
-    updateNumericInput(session, "preclin_vss2_pc", value = 1)
+    updateNumericInput(session, "preclin_vss2_pc", value = 4)
     updateNumericInput(session, "preclin_cl3_pc", value = 10)
-    updateNumericInput(session, "preclin_vss3_pc", value = 4)
+    updateNumericInput(session, "preclin_vss3_pc", value = 0.4)
     
     # --- PD Parameters ---
     updateNumericInput(session, "PC_caseum_pc", value = 0.6)

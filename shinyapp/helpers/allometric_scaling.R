@@ -7,14 +7,14 @@ library(ggplot2)
 species_params <- data.frame(
   Species = c("Mouse", "Rat", "Dog"),
   BW = c(0.025, 0.25, 10)
-)
+  )
 
 
 model_cl_fit <- function(df_data) {
   validate(
     need(length(unique(df_data$Species[!is.na(df_data$CL)])) >= 2, 
          "Please enter CL data for at least two species.")
-  )
+    )
   model <- lm(logCL ~ logBW, data = df_data)
   intercept <- coef(model)[1]
   slope <- coef(model)[2]
@@ -24,15 +24,14 @@ model_cl_fit <- function(df_data) {
   clin_CL <- 10^log10_clin_CL
   
   list(model = model, intercept = intercept, slope = slope, CI_95 = CI_95, R2 = R2, clin_CL = clin_CL)
-}
+  }
 
 
 model_v_fit <- function(df_data) {
   validate(
     need(length(unique(df_data$Species[!is.na(df_data$V)])) >= 2, 
          "Please enter V data for at least two species.")
-  )
-  
+    )
   model <- lm(logV ~ logBW, data = df_data)
   intercept <- coef(model)[1]
   slope <- coef(model)[2]
