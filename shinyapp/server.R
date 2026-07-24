@@ -93,7 +93,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "preclin_cl2_lo", value = 4)
     updateNumericInput(session, "preclin_vss2_lo", value = 4)
     updateNumericInput(session, "preclin_cl3_lo", value = 10)
-    updateNumericInput(session, "preclin_vss3_lo", value = 0.4)
+    updateNumericInput(session, "preclin_vss3_lo", value = 5)
     
     # --- PD Parameters ---
     updateNumericInput(session, "MIC", value = 0.001)
@@ -533,7 +533,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "preclin_cl2_sp", value = 4)
     updateNumericInput(session, "preclin_vss2_sp", value = 4)
     updateNumericInput(session, "preclin_cl3_sp", value = 10)
-    updateNumericInput(session, "preclin_vss3_sp", value = 0.4)
+    updateNumericInput(session, "preclin_vss3_sp", value = 5)
     
     # --- PD Parameters ---
     updateNumericInput(session, "PC_caseum", value = 0.6)
@@ -989,7 +989,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "preclin_cl2_pc", value = 4)
     updateNumericInput(session, "preclin_vss2_pc", value = 4)
     updateNumericInput(session, "preclin_cl3_pc", value = 10)
-    updateNumericInput(session, "preclin_vss3_pc", value = 0.4)
+    updateNumericInput(session, "preclin_vss3_pc", value = 5)
     
     # --- PD Parameters ---
     updateNumericInput(session, "PC_caseum_pc", value = 0.6)

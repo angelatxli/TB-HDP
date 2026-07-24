@@ -132,7 +132,7 @@ ui <- dashboardPage(
                     fluidRow(
                       column(4, selectInput("species3_lo", "Preclinical species", choices = animals,selected = "Dog")),
                       column(4, numericInput("preclin_cl3_lo", "Plasma CL (L/hr/kg)", value = 10, min = 0)),
-                      column(4, numericInput("preclin_vss3_lo", "Plasma Vss (L/kg)", value = 0.4, min = 0))            
+                      column(4, numericInput("preclin_vss3_lo", "Plasma Vss (L/kg)", value = 5, min = 0))            
                       )
                   ),
                 
@@ -277,7 +277,7 @@ ui <- dashboardPage(
                          fluidRow(
                            column(4, selectInput("species3_sp", "Preclinical species", choices = animals,selected = "Dog")),
                            column(4, numericInput("preclin_cl3_sp", "Plasma CL (L/hr/kg)", value = 10, min = 0)),
-                           column(4, numericInput("preclin_vss3_sp", "Plasma Vss (L/kg)", value = 0.4, min = 0))            
+                           column(4, numericInput("preclin_vss3_sp", "Plasma Vss (L/kg)", value = 5, min = 0))            
                          )
                      ),
                      
@@ -489,7 +489,7 @@ ui <- dashboardPage(
                          fluidRow(
                            column(4, selectInput("species3_pc", "Preclinical species", choices = animals,selected = "Dog")),
                            column(4, numericInput("preclin_cl3_pc", "Plasma CL (L/hr)", value = 10, min = 0)),
-                           column(4, numericInput("preclin_vss3_pc", "Plasma Vss (L/kg)", value = 0.4, min = 0))            
+                           column(4, numericInput("preclin_vss3_pc", "Plasma Vss (L/kg)", value = 5, min = 0))            
                            )
                          ),
                      
