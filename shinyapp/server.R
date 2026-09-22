@@ -7,7 +7,7 @@ library(shinydashboard)
 library(purrr)
 library(markdown)
 
-####
+#### 
 animals <- c("BALB/c Mouse", "Rat", "Dog")
 
 species_params <- data.frame(
@@ -50,8 +50,10 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_lo", value = NA)
     
     updateNumericInput(session, "fu_lo", value = NA)
-    updateNumericInput(session, "heppk_lo", value = NA)
-    updateNumericInput(session, "micpk_lo", value = NA)
+    updateNumericInput(session, "fuinc_hep_lo", value = NA)
+    updateNumericInput(session, "clint_hep_lo", value = NA)
+    updateNumericInput(session, "fuinc_lm_lo", value = NA)
+    updateNumericInput(session, "clint_lm_lo", value = NA)
     
     updateNumericInput(session, "preclin_cl1_lo", value = NA)
     updateNumericInput(session, "preclin_vss1_lo", value = NA)
@@ -84,8 +86,12 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_lo", value = 0.8)
-    updateNumericInput(session, "heppk_lo", value = 10)
-    updateNumericInput(session, "micpk_lo", value = 12)
+    
+    updateNumericInput(session, "fuinc_hep_lo", value = 0.95)
+    updateNumericInput(session, "clint_hep_lo", value = 10)
+    
+    updateNumericInput(session, "fuinc_lm_lo", value = 0.95)
+    updateNumericInput(session, "clint_lm_lo", value = 10.2)
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_lo", value = 2.5)
@@ -110,9 +116,16 @@ server <- function(input, output, session) {
   inputs_lo <- reactive({
     list(input$drugbackbone,
          input$pk_route_lo, input$ka_lo,
-         input$dose_lo, input$ndoses_lo, input$inter_lo, 
+         input$dose_lo, input$ndoses_lo, input$inter_lo,
+         
          input$pkmethod_lo, 
-         input$heppk_lo, input$fu_lo, input$micpk_lo,
+         input$ivive_method_lo,
+         input$fu_lo,
+         input$clint_hep_lo, 
+         input$fuinc_hep_lo,
+         input$clint_lm_lo, 
+         input$fuinc_lm_lo,
+         
          input$preclin_cl1_lo, input$preclin_cl2_lo, input$preclin_cl3_lo,
          input$preclin_vss1_lo, input$preclin_vss2_lo, input$preclin_vss3_lo,
          input$MIC)
@@ -263,18 +276,24 @@ server <- function(input, output, session) {
     })
   
   clin_CL_lo <- reactive({
-    if (input$pkmethod_lo == "ivive_h") {
-      hep_ivive(input$heppk_lo,input$fu_lo)
-      #*input$fu_lo
-      }
-    else if (input$pkmethod_lo == "ivive_lm") {
-      lm_ivive(input$micpk_lo,input$fu_lo)
-      #*input$fu_lo
-      }
-    else if (input$pkmethod_lo == "alloscale") {
+    if (input$pkmethod_lo == "alloscale") {
       res <- model_Cl_results_lo()
       res$clin_CL
+    }
+    
+    else if (input$ivive_method_lo == "hep") {
+      hep_ivive(input$clint_hep_lo,
+                input$fu_lo,
+                input$fuinc_hep_lo
+                )
       }
+    else if (input$ivive_method_lo == "lm") {
+      lm_ivive(input$clint_lm_lo,
+               input$fu_lo,
+               input$fuinc_lm_lo
+               )
+      }
+    
     else {
       NA  # in case neither method is selected
       }
@@ -486,8 +505,10 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_sp", value = NA)
     
     updateNumericInput(session, "fu_sp", value = NA)
-    updateNumericInput(session, "heppk_sp", value = NA)
-    updateNumericInput(session, "micpk_sp", value = NA)
+    updateNumericInput(session, "fuinc_hep_sp", value = NA)
+    updateNumericInput(session, "clint_hep_sp", value = NA)
+    updateNumericInput(session, "fuinc_lm_sp", value = NA)
+    updateNumericInput(session, "clint_lm_sp", value = NA)
     
     updateNumericInput(session, "preclin_cl1_sp", value = NA)
     updateNumericInput(session, "preclin_vss1_sp", value = NA)
@@ -524,8 +545,10 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_sp", value = 0.8)
-    updateNumericInput(session, "heppk_sp", value = 10)
-    updateNumericInput(session, "micpk_sp", value = 10.2)
+    updateNumericInput(session, "fuinc_hep_sp", value = 0.95)
+    updateNumericInput(session, "clint_hep_sp", value = 10)
+    updateNumericInput(session, "fuinc_lm_sp", value = 0.95)
+    updateNumericInput(session, "clint_lm_sp", value = 10.2)
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_sp", value = 2.5)
@@ -550,14 +573,22 @@ server <- function(input, output, session) {
   inputs_sp <- reactive({
     list(input$pk_route_sp,input$ka_sp,
          input$dose_sp, input$ndoses_sp, input$inter_sp, 
+         
          input$pkmethod_sp,
-         input$heppk_sp, input$fu_sp, input$micpk_sp,
+         input$ivive_method_sp,
+         input$fu_sp,
+         input$fuinc_hep_sp,
+         input$clint_hep_sp,
+         input$fuinc_lm_sp,
+         input$clint_lm_sp,
+         
          input$preclin_cl1_sp, input$preclin_cl2_sp, input$preclin_cl3_sp,
          input$preclin_vss1_sp, input$preclin_vss2_sp, input$preclin_vss3_sp,
          input$PC_caseum,
          input$casMBC90_sp
          )
-    })
+    }
+    )
   
   # When any input changes, gray out the plot
   observeEvent(inputs_sp(), {
@@ -697,19 +728,28 @@ server <- function(input, output, session) {
     plot2_sp_obj()
     })
   
+  
   clin_CL_sp <- reactive({
-    if (input$pkmethod_sp == "ivive_h") {
-      hep_ivive(input$heppk_sp,input$fu_sp)
-      } 
-    else if (input$pkmethod_sp == "ivive_lm") {
-      lm_ivive(input$micpk_sp,input$fu_sp)
-      }
-    else if (input$pkmethod_sp == "alloscale") {
+    if (input$pkmethod_sp == "alloscale") {
       res <- model_Cl_results_sp()
       res$clin_CL
       }
+    
+    else if (input$ivive_method_sp == "hep") {
+      hep_ivive(input$clint_hep_sp,
+                input$fu_sp,
+                input$fuinc_hep_sp
+                )
+      }
+    else if (input$ivive_method_sp == "lm") {
+      lm_ivive(input$clint_lm_sp,
+               input$fu_sp,
+               input$fuinc_lm_sp
+               )
+      }
+    
     else {
-      NA
+      NA  # in case neither method is selected
     }
   })
   
@@ -935,8 +975,10 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_pc", value = NA)
     
     updateNumericInput(session, "fu_pc", value = NA)
-    updateNumericInput(session, "heppk_pc", value = NA)
-    updateNumericInput(session, "micpk_pc", value = NA)
+    updateNumericInput(session, "fuinc_hep_pc", value = NA)
+    updateNumericInput(session, "clint_hep_pc", value = NA)
+    updateNumericInput(session, "fuinc_lm_pc", value = NA)
+    updateNumericInput(session, "clint_lm_pc", value = NA)
     
     updateNumericInput(session, "preclin_cl1_pc", value = NA)
     updateNumericInput(session, "preclin_vss1_pc", value = NA)
@@ -979,9 +1021,11 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_pc", value = 24)
     
     # --- PK Parameters ---
-    updateNumericInput(session, "fu_pc", value = 0.25)
-    updateNumericInput(session, "heppk_pc", value = 15.5)
-    updateNumericInput(session, "micpk_pc", value = 10.2)
+    updateNumericInput(session, "fu_pc", value = 0.8)
+    updateNumericInput(session, "fuinc_hep_pc", value = 0.95)
+    updateNumericInput(session, "clint_hep_pc", value = 10)
+    updateNumericInput(session, "fuinc_lm_pc", value = 0.95)
+    updateNumericInput(session, "clint_lm_pc", value = 10.2)
     
     # --- Preclinical PK ---
     updateNumericInput(session, "preclin_cl1_pc", value = 2.5)
@@ -1011,8 +1055,14 @@ server <- function(input, output, session) {
     list(input$drugname_pc ,input$drugbackbone_pc,
          input$pk_route_pc, input$ka_pc,
          input$dose_m_pc, input$dose_pc, input$ndoses_pc, input$inter_pc, 
-         input$pkmethod_pc, 
-         input$heppk_pc, input$fu_pc, input$micpk_pc,
+         input$pkmethod_pc,
+         input$ivive_method_pc,
+         input$fu_pc,
+         input$fuinc_hep_pc,
+         input$clint_hep_pc,
+         input$fuinc_lm_pc,
+         input$clint_lm_pc,
+         
          input$preclin_cl1_pc, input$preclin_cl2_pc, input$preclin_cl3_pc,
          input$preclin_vss1_pc, input$preclin_vss2_pc, input$preclin_vss3_pc,
          input$PC_caseum_pc, input$PC_cell,
@@ -1196,20 +1246,30 @@ server <- function(input, output, session) {
     })
   
   clin_CL_pc <- reactive({
-    if (input$pkmethod_pc == "ivive_h") {
-      hep_ivive(input$heppk_pc,input$fu_pc)
-    }
-    else if (input$pkmethod_pc == "ivive_lm") {
-      lm_ivive(input$micpk_pc,input$fu_pc)
-    }
-    else if (input$pkmethod_pc == "alloscale") {
+    if (input$pkmethod_pc == "alloscale") {
       res <- model_Cl_results()
       res$clin_CL
     }
+    
+    else if (input$ivive_method_pc == "hep") {
+      hep_ivive(input$clint_hep_pc,
+                input$fu_pc,
+                input$fuinc_hep_pc
+                )
+      }
+    
+    else if (input$ivive_method_pc == "lm") {
+      lm_ivive(input$clint_lm_pc,
+               input$fu_pc,
+               input$fuinc_lm_pc
+               )
+      }
+    
     else {
       NA  # in case neither method is selected
     }
   })
+  
   
   clin_V_pc <- reactive({
     bw_val <- BW()

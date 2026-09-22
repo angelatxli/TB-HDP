@@ -16,10 +16,10 @@ well_stirred_model <- function(CL_LM_invivo, fu, Qh) {
 }
 
 
-lm_ivive <- function(CL_LM, fu) {
+lm_ivive <- function(CL_LM, fu, fu_inc) {
   
   # Step 1: Scale in vitro CLint to in vivo (mL/min/kg)
-  CL_LM_invivo = CL_LM*40*25.7*10^-3
+  CL_LM_invivo = CL_LM/fu_inc*40*25.7*10^-3
   
   # Step 2: Apply well-stirred model
   CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7)
@@ -32,10 +32,10 @@ lm_ivive <- function(CL_LM, fu) {
 
 
 
-hep_ivive <- function(CL_LM, fu) {
+hep_ivive <- function(CL_LM, fu, fu_inc) {
   
   # Step 1: Scale in vitro CLint to in vivo (mL/min/kg)
-  CL_LM_invivo = CL_LM*120*25.7*10^-3
+  CL_LM_invivo = CL_LM/fu_inc*120*25.7*10^-3
   
   # Step 2: Apply well-stirred model
   CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7)

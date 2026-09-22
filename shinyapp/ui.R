@@ -110,11 +110,37 @@ ui <- dashboardPage(
                     fluidRow(column(12, div(style = "white-space: nowrap;", numericInput("inter_lo", "Dosing interval (h)", value = 24, min = 1))))
                 ),
                 
+                
+                
                 box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
+                    
                     fluidRow(column(6, numericInput("fu_lo", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                    fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
-                    fluidRow(column(12, numericInput("micpk_lo", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
-                ),
+                    
+                    radioButtons(
+                      "ivive_method_lo",
+                      "IVIVE Assay",
+                      c(
+                        "Hepatocyte" = "hep",
+                        "Liver microsome" = "lm"
+                        )
+                      ),
+                    
+                    #fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
+                    #fluidRow(column(12, numericInput("micpk_lo", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0))),
+                    
+                    conditionalPanel(
+                      condition = "input.ivive_method_lo == 'hep'",
+                      numericInput("fuinc_hep_lo", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                      numericInput("clint_hep_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)
+                      ),
+                    
+                    conditionalPanel(
+                      condition = "input.ivive_method_lo == 'lm'",
+                      numericInput("fuinc_lm_lo", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                      numericInput("clint_lm_lo", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)
+                      )
+                
+                    ),
                 
                 box(title = HTML("<i>In vivo</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                     fluidRow(
@@ -141,8 +167,7 @@ ui <- dashboardPage(
                     ),
                 
                 column(12, radioButtons("pkmethod_lo", "Clearance Prediction Method",
-                                       c("IVIVE - Hepatocyte" = "ivive_h", 
-                                         "IVIVE - Liver microsome" = "ivive_lm", 
+                                       c("IVIVE" = "ivive", 
                                          "Allometry" = "alloscale")),
                        
                        conditionalPanel(condition = "input.pkmethod_lo == 'alloscale'",
@@ -257,9 +282,33 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(column(6, numericInput("fu_sp", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_sp", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
-                         fluidRow(column(12, numericInput("micpk_sp", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
-                     ),
+                         
+                         radioButtons(
+                           "ivive_method_sp",
+                           "IVIVE Assay",
+                           c(
+                             "Hepatocyte" = "hep",
+                             "Liver microsome" = "lm"
+                             )
+                           ),
+                         
+                         #fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_sp", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
+                         #fluidRow(column(12, numericInput("micpk_sp", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
+                     
+                         conditionalPanel(
+                           condition = "input.ivive_method_sp == 'hep'",
+                           numericInput("fuinc_hep_sp", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                           numericInput("clint_hep_sp", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)
+                           ),
+                         
+                         conditionalPanel(
+                           condition = "input.ivive_method_sp == 'lm'",
+                           numericInput("fuinc_lm_sp", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                           numericInput("clint_lm_sp", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)
+                           )
+                         
+                         
+                         ),
                      
                      box(title = HTML("<i>In vivo</i> plasma PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
@@ -352,8 +401,7 @@ ui <- dashboardPage(
                      ),
                      
                      column(12, radioButtons("pkmethod_sp", "Clearance Prediction Method",
-                                             c("IVIVE - Hepatocyte" = "ivive_h", 
-                                               "IVIVE - Liver microsome" = "ivive_lm", 
+                                             c("IVIVE" = "ivive", 
                                                "Allometry" = "alloscale")),
                             
                             conditionalPanel(condition = "input.pkmethod_sp == 'alloscale'",
@@ -469,9 +517,32 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(column(6, numericInput("fu_pc", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
-                         fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_pc", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
-                         fluidRow(column(12, numericInput("micpk_pc", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
-                     ),
+                         
+                         radioButtons(
+                           "ivive_method_pc",
+                           "IVIVE Assay",
+                           c(
+                             "Hepatocyte" = "hep",
+                             "Liver microsome" = "lm"
+                           )
+                         ),
+                         
+                         #fluidRow(column(12, div(style = "white-space: nowrap;",numericInput("heppk_pc", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)))),
+                         #fluidRow(column(12, numericInput("micpk_pc", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)))
+                     
+                         conditionalPanel(
+                           condition = "input.ivive_method_pc == 'hep'",
+                           numericInput("fuinc_hep_pc", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                           numericInput("clint_hep_pc", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)
+                         ),
+                         
+                         conditionalPanel(
+                           condition = "input.ivive_method_pc == 'lm'",
+                           numericInput("fuinc_lm_pc", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
+                           numericInput("clint_lm_pc", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)
+                         )
+                         
+                         ),
                      
                      box(title = HTML("<i>In vivo</i> plasma PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
@@ -586,8 +657,7 @@ ui <- dashboardPage(
                      
 
                      column(12, radioButtons("pkmethod_pc", "Clearance Prediction Method",
-                                             c("IVIVE - Hepatocyte" = "ivive_h", 
-                                               "IVIVE - Liver microsome" = "ivive_lm", 
+                                             c("IVIVE" = "ivive", 
                                                "Allometry" = "alloscale")),
                             
                             conditionalPanel(condition = "input.pkmethod_pc == 'alloscale'",
