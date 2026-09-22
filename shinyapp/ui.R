@@ -114,7 +114,10 @@ ui <- dashboardPage(
                 
                 box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                     
-                    fluidRow(column(6, numericInput("fu_lo", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
+                    fluidRow(
+                      column(6, numericInput("fu_lo", "Human plasma fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                      column(6, numericInput("rbp_lo", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01)),
+                      ),
                     
                     radioButtons(
                       "ivive_method_lo",
@@ -131,13 +134,13 @@ ui <- dashboardPage(
                     conditionalPanel(
                       condition = "input.ivive_method_lo == 'hep'",
                       numericInput("fuinc_hep_lo", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
-                      numericInput("clint_hep_lo", HTML("Human Hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)
+                      numericInput("clint_hep_lo", HTML("Human hepatocyte CL<sub>int</sub> (µL/min/10<sup>6</sup> cells)"), value = 10, min = 0)
                       ),
                     
                     conditionalPanel(
                       condition = "input.ivive_method_lo == 'lm'",
                       numericInput("fuinc_lm_lo", HTML("f<sub>u,inc<sub>"), value = 0.95, min = 0, max = 1),
-                      numericInput("clint_lm_lo", HTML("Human Microsomal CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)
+                      numericInput("clint_lm_lo", HTML("Human liver microsome CL<sub>int</sub> (µL/min/mg)"), value = 12, min = 0)
                       )
                 
                     ),
@@ -281,7 +284,10 @@ ui <- dashboardPage(
                      ),
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
-                         fluidRow(column(6, numericInput("fu_sp", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
+                         fluidRow(
+                           column(6, numericInput("fu_sp", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                           column(6, numericInput("rbp_sp", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01)),
+                           ),
                          
                          radioButtons(
                            "ivive_method_sp",
@@ -516,7 +522,10 @@ ui <- dashboardPage(
                      ),
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
-                         fluidRow(column(6, numericInput("fu_pc", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01))),
+                         fluidRow(
+                           column(6, numericInput("fu_pc", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                           column(6, numericInput("rbp_pc", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01))
+                           ),
                          
                          radioButtons(
                            "ivive_method_pc",

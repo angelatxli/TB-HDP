@@ -9,20 +9,29 @@ species_params <- data.frame(
 )
 
 
-
-well_stirred_model <- function(CL_LM_invivo, fu, Qh) {
-  CLh <- (Qh * fu * CL_LM_invivo) / (Qh + fu * CL_LM_invivo)
-  return(CLh)
+well_stirred_model <- function(CL_LM_invivo, fu, Qh, Rbp) {
+  
+  # Convert plasma fu to blood fu
+  fu_blood <- fu / Rbp
+  
+  # Blood clearance
+  CL_blood <- (Qh * fu_blood * CL_LM_invivo) / 
+              (Qh + fu_blood * CL_LM_invivo)
+  
+  # Convert blood clearance to plasma clearance
+  CL_plasma <- CL_blood * Rbp
+  
+  return(CL_plasma)
 }
 
 
-lm_ivive <- function(CL_LM, fu, fu_inc) {
+lm_ivive <- function(CL_LM, fu, fu_inc, Rbp) {
   
   # Step 1: Scale in vitro CLint to in vivo (mL/min/kg)
   CL_LM_invivo = CL_LM/fu_inc*40*25.7*10^-3
   
   # Step 2: Apply well-stirred model
-  CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7)
+  CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7, Rbp)
   
   # Step 3: Convert to L/h (multiply by BW in kg and convert to L)
   CLh_LM_result_L_h = CLh_LM_result * 55 * 60/1000
@@ -32,13 +41,13 @@ lm_ivive <- function(CL_LM, fu, fu_inc) {
 
 
 
-hep_ivive <- function(CL_LM, fu, fu_inc) {
+hep_ivive <- function(CL_LM, fu, fu_inc, Rbp) {
   
   # Step 1: Scale in vitro CLint to in vivo (mL/min/kg)
   CL_LM_invivo = CL_LM/fu_inc*120*25.7*10^-3
   
   # Step 2: Apply well-stirred model
-  CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7)
+  CLh_LM_result = well_stirred_model(CL_LM_invivo, fu, 20.7, Rbp)
   
   # Step 3: Convert to L/h (multiply by BW in kg and convert to L)
   CLh_LM_result_L_h = CLh_LM_result * 55 * 60/1000

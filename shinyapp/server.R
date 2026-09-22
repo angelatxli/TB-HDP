@@ -50,6 +50,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_lo", value = NA)
     
     updateNumericInput(session, "fu_lo", value = NA)
+    updateNumericInput(session, "rbp_lo", value = NA)
     updateNumericInput(session, "fuinc_hep_lo", value = NA)
     updateNumericInput(session, "clint_hep_lo", value = NA)
     updateNumericInput(session, "fuinc_lm_lo", value = NA)
@@ -86,7 +87,7 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_lo", value = 0.8)
-    
+    updateNumericInput(session, "rbp_lo", value = 1)
     updateNumericInput(session, "fuinc_hep_lo", value = 0.95)
     updateNumericInput(session, "clint_hep_lo", value = 10)
     
@@ -120,7 +121,7 @@ server <- function(input, output, session) {
          
          input$pkmethod_lo, 
          input$ivive_method_lo,
-         input$fu_lo,
+         input$fu_lo, input$rbp_lo,
          input$clint_hep_lo, 
          input$fuinc_hep_lo,
          input$clint_lm_lo, 
@@ -284,13 +285,15 @@ server <- function(input, output, session) {
     else if (input$ivive_method_lo == "hep") {
       hep_ivive(input$clint_hep_lo,
                 input$fu_lo,
-                input$fuinc_hep_lo
+                input$fuinc_hep_lo,
+                input$rbp_lo
                 )
       }
     else if (input$ivive_method_lo == "lm") {
       lm_ivive(input$clint_lm_lo,
                input$fu_lo,
-               input$fuinc_lm_lo
+               input$fuinc_lm_lo,
+               input$rbp_lo
                )
       }
     
@@ -505,6 +508,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_sp", value = NA)
     
     updateNumericInput(session, "fu_sp", value = NA)
+    updateNumericInput(session, "rbp_sp", value = NA)
     updateNumericInput(session, "fuinc_hep_sp", value = NA)
     updateNumericInput(session, "clint_hep_sp", value = NA)
     updateNumericInput(session, "fuinc_lm_sp", value = NA)
@@ -545,6 +549,7 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_sp", value = 0.8)
+    updateNumericInput(session, "rbp_sp", value = 1)
     updateNumericInput(session, "fuinc_hep_sp", value = 0.95)
     updateNumericInput(session, "clint_hep_sp", value = 10)
     updateNumericInput(session, "fuinc_lm_sp", value = 0.95)
@@ -738,13 +743,15 @@ server <- function(input, output, session) {
     else if (input$ivive_method_sp == "hep") {
       hep_ivive(input$clint_hep_sp,
                 input$fu_sp,
-                input$fuinc_hep_sp
+                input$fuinc_hep_sp,
+                input$rbp_sp
                 )
       }
     else if (input$ivive_method_sp == "lm") {
       lm_ivive(input$clint_lm_sp,
                input$fu_sp,
-               input$fuinc_lm_sp
+               input$fuinc_lm_sp,
+               input$rbp_sp
                )
       }
     
@@ -975,6 +982,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "inter_pc", value = NA)
     
     updateNumericInput(session, "fu_pc", value = NA)
+    updateNumericInput(session, "rbp_pc", value = NA)
     updateNumericInput(session, "fuinc_hep_pc", value = NA)
     updateNumericInput(session, "clint_hep_pc", value = NA)
     updateNumericInput(session, "fuinc_lm_pc", value = NA)
@@ -1022,6 +1030,7 @@ server <- function(input, output, session) {
     
     # --- PK Parameters ---
     updateNumericInput(session, "fu_pc", value = 0.8)
+    updateNumericInput(session, "rbp_pc", value = 1)
     updateNumericInput(session, "fuinc_hep_pc", value = 0.95)
     updateNumericInput(session, "clint_hep_pc", value = 10)
     updateNumericInput(session, "fuinc_lm_pc", value = 0.95)
@@ -1057,7 +1066,7 @@ server <- function(input, output, session) {
          input$dose_m_pc, input$dose_pc, input$ndoses_pc, input$inter_pc, 
          input$pkmethod_pc,
          input$ivive_method_pc,
-         input$fu_pc,
+         input$fu_pc, input$rbp_pc,
          input$fuinc_hep_pc,
          input$clint_hep_pc,
          input$fuinc_lm_pc,
@@ -1254,14 +1263,16 @@ server <- function(input, output, session) {
     else if (input$ivive_method_pc == "hep") {
       hep_ivive(input$clint_hep_pc,
                 input$fu_pc,
-                input$fuinc_hep_pc
+                input$fuinc_hep_pc,
+                input$rbp_pc
                 )
       }
     
     else if (input$ivive_method_pc == "lm") {
       lm_ivive(input$clint_lm_pc,
                input$fu_pc,
-               input$fuinc_lm_pc
+               input$fuinc_lm_pc,
+               input$rbp_pc
                )
       }
     
