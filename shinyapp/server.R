@@ -1001,7 +1001,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "MIC_pc", value = NA)
     updateNumericInput(session, "casMBC90_pc", value = NA)
     updateNumericInput(session, "ec50", value = NA)
-    #updateNumericInput(session, "Emax", value = NA)
+    updateNumericInput(session, "fu_ratio", value = NA)
     #updateNumericInput(session, "hill_co", value = NA)
     
     
@@ -1049,6 +1049,7 @@ server <- function(input, output, session) {
     updateNumericInput(session, "PC_cell", value = 2.8)
     updateNumericInput(session, "casMBC90_pc", value = 0.5)
     updateNumericInput(session, "ec50", value = 0.001)
+    updateNumericInput(session, "fu_ratio", value = 1)
     #updateNumericInput(session, "Emax", value = 0.2)
     #updateNumericInput(session, "hill_co", value = 1)
     
@@ -1076,8 +1077,8 @@ server <- function(input, output, session) {
          input$preclin_vss1_pc, input$preclin_vss2_pc, input$preclin_vss3_pc,
          input$PC_caseum_pc, input$PC_cell,
          input$casMBC90_pc, 
-         input$ec50
-         #input$Emax
+         input$ec50,
+         input$fu_ratio
          #input$hill_co
          )
     })
@@ -1164,8 +1165,8 @@ server <- function(input, output, session) {
       "Plasma-to-caseum PC" = input$PC_caseum_pc,
       "Plasma-to-cell PC" = input$PC_cell,
       "casMBC90" = input$casMBC90_pc,
-      "EC50" = input$ec50
-      #"Emax" = input$Emax,
+      "EC50" = input$ec50,
+      "fu ratio" = input$fu_ratio
       #"Hill coefficient" = input$hill_co
       )
     
@@ -1320,7 +1321,7 @@ server <- function(input, output, session) {
       input$inter_pc, 
       input$PC_caseum_pc, 
       KPL = 10)
-  })
+    })
   
   ### Plot  --------
   
@@ -1377,7 +1378,7 @@ server <- function(input, output, session) {
   
   observeEvent(input$click_pc, {
     res <- sim_lesion_result()
-    plot5_data(plot_lesion_pk(res, NA, NA, NA, input$ec50))
+    plot5_data(plot_lesion_pk(res, NA, NA, NA, input$ec50*input$fu_ratio))
     })
   
   output$plot5 <- renderPlot({
@@ -1409,7 +1410,7 @@ server <- function(input, output, session) {
     coverage_caseum_df <- coverage_result_caseum_pc()
     coverage_lesion_df <- coverage_result_lesion()
     plot7_pc_data(plot_coverage(coverage_caseum_df, NA, NA, input$casMBC90_pc, NA))
-    plot8_data(plot_coverage(coverage_lesion_df, NA, NA, NA, input$ec50))
+    plot8_data(plot_coverage(coverage_lesion_df, NA, NA, NA, input$ec50*input$fu_ratio))
     })
   
   ## ---- Caseum --------
@@ -1474,7 +1475,7 @@ server <- function(input, output, session) {
       MIC      = NA,
       macIC90  = NA,
       casMBC90 = NA,
-      ec50     = input$ec50
+      ec50     = input$ec50 * input$fu_ratio
       )
     })
   

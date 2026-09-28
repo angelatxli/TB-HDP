@@ -115,7 +115,7 @@ ui <- dashboardPage(
                 box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                     
                     fluidRow(
-                      column(6, numericInput("fu_lo", "Human plasma fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                      column(6, numericInput("fu_lo", HTML("Human f<sub>u</sub> (0-1)"), value = 0.8, min = 0, max = 1, step = 0.01)),
                       column(6, numericInput("rbp_lo", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01)),
                       ),
                     
@@ -285,7 +285,7 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
-                           column(6, numericInput("fu_sp", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                           column(6, numericInput("fu_sp", HTML("Human f<sub>u</sub> (0-1)"), value = 0.8, min = 0, max = 1, step = 0.01)),
                            column(6, numericInput("rbp_sp", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01)),
                            ),
                          
@@ -523,7 +523,7 @@ ui <- dashboardPage(
                      
                      box(title = HTML("<i>In vitro</i> PK"), width = 12, collapsible = TRUE, collapsed = TRUE,
                          fluidRow(
-                           column(6, numericInput("fu_pc", "Human fu (0-1)", value = 0.8, min = 0, max = 1, step = 0.01)),
+                           column(6, numericInput("fu_pc", HTML("Human f<sub>u</sub> (0-1)"), value = 0.8, min = 0, max = 1, step = 0.01)),
                            column(6, numericInput("rbp_pc", HTML("R<sub>b/p<sub>"), value = 1, min = 0, max = 1, step = 0.01))
                            ),
                          
@@ -660,7 +660,8 @@ ui <- dashboardPage(
                          fluidRow(
                            column(6, selectInput("infmod", "Mouse infection model", list("Acute", "Subacute", "Chronic"))),
                            column(6, numericInput("ec50", HTML("EC<sub>50</sub> (mg/L)"), value = 0.001, min = 0))),
-                         #fluidRow(column(12,numericInput("Emax", HTML("E<sub>max</sub>"), value = 0.2, min = 0, max = 5))),
+                       fluidRow(column(12,numericInput("fu_ratio", HTML("f<sub>u,mouse</sub>/f<sub>u,human</sub>"), value = 1, min = 0, step = 0.01))),  
+                       #fluidRow(column(12,numericInput("Emax", HTML("E<sub>max</sub>"), value = 0.2, min = 0, max = 5))),
                          #fluidRow(column(12,numericInput("hill_co", HTML("Hill Coefficient"), value = 1, min = 0.1, max = 5)))
                      ),
                      
