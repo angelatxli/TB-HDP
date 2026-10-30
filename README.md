@@ -1,2 +1,4 @@
 ## About The Project
 The **UCSF Tuberculosis Human Dose Prediction Tool** was developed by the Savic Lab in support of the **Multi-model Landscape to Integrate Machine Learning, Site of Action, and Mechanistic PKPD Translational Tools for Improved Selection of TB Drug Combination Regimens and Informed Dose Selection** project funded by the Gates Foundation. This tool predicts clinical efficacious dose ranges for anti-tuberculosis compounds in development based on *in vitro* and early *in vivo* pharmacokinetic and pharmacodynamic data. 
+
+Associated Manuscript can be found at: https://academic.oup.com/ajrccm/advance-article/doi/10.1093/ajrccm/aamag580/9004406?utm_source=authortollfreelink&utm_campaign=ajrccm&utm_medium=email
