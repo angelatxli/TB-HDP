@@ -350,7 +350,7 @@ ui <- dashboardPage(
                              tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
                                     translational modeling platform. For further details, please refer to this",
                              tags$a(
-                               href = "https://www.nature.com/articles/nrc.2017.121",
+                               href = "https://www.nature.com/articles/s41467-026-78502-z",
                                target = "_blank",
                                "link"
                              ),
@@ -587,7 +587,7 @@ ui <- dashboardPage(
                              tags$p("These parameters describe drug distribution into clinical lesions derived from a rabbit-to-human 
                                     translational modeling platform. For further details, please refer to this",
                                     tags$a(
-                                      href = "https://www.nature.com/articles/nrc.2017.121",
+                                      href = "https://www.nature.com/articles/s41467-026-78502-z",
                                       target = "_blank",
                                       "link"
                                       ),
